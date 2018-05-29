@@ -13,9 +13,12 @@
 		660EF4E220B911EA00D42F23 /* VCPureYogaClassBooking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 660EF4E020B911EA00D42F23 /* VCPureYogaClassBooking.xcdatamodeld */; };
 		660EF4E420B911EC00D42F23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 660EF4E320B911EC00D42F23 /* Assets.xcassets */; };
 		660EF4E720B911EC00D42F23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660EF4E520B911EC00D42F23 /* LaunchScreen.storyboard */; };
+		660EF4EF20B913A500D42F23 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660EF4EE20B913A500D42F23 /* Constants.swift */; };
+		695FCB815F87BA017873E69C /* Pods_VCPureYogaClassBooking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACFE20C962F2CDCD2FF29323 /* Pods_VCPureYogaClassBooking.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		437855BCDBAFA36B52D20F6A /* Pods-VCPureYogaClassBooking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VCPureYogaClassBooking.release.xcconfig"; path = "Pods/Target Support Files/Pods-VCPureYogaClassBooking/Pods-VCPureYogaClassBooking.release.xcconfig"; sourceTree = "<group>"; };
 		660EF4D620B911EA00D42F23 /* VCPureYogaClassBooking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCPureYogaClassBooking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		660EF4D920B911EA00D42F23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		660EF4DB20B911EA00D42F23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		660EF4E320B911EC00D42F23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		660EF4E620B911EC00D42F23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		660EF4E820B911EC00D42F23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		660EF4EE20B913A500D42F23 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ACFE20C962F2CDCD2FF29323 /* Pods_VCPureYogaClassBooking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VCPureYogaClassBooking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE7C4E97AB677401D4D1D54 /* Pods-VCPureYogaClassBooking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VCPureYogaClassBooking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VCPureYogaClassBooking/Pods-VCPureYogaClassBooking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				695FCB815F87BA017873E69C /* Pods_VCPureYogaClassBooking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43F9DFF39EB70D814BCEFDFE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAE7C4E97AB677401D4D1D54 /* Pods-VCPureYogaClassBooking.debug.xcconfig */,
+				437855BCDBAFA36B52D20F6A /* Pods-VCPureYogaClassBooking.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		660EF4CD20B911EA00D42F23 = {
 			isa = PBXGroup;
 			children = (
 				660EF4D820B911EA00D42F23 /* VCPureYogaClassBooking */,
 				660EF4D720B911EA00D42F23 /* Products */,
+				43F9DFF39EB70D814BCEFDFE /* Pods */,
+				E503EB9B700FD2D25A95A868 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				660EF4D920B911EA00D42F23 /* AppDelegate.swift */,
+				660EF4EE20B913A500D42F23 /* Constants.swift */,
 				660EF4DB20B911EA00D42F23 /* ViewController.swift */,
 				660EF4DD20B911EA00D42F23 /* Main.storyboard */,
 				660EF4E320B911EC00D42F23 /* Assets.xcassets */,
@@ -67,6 +86,14 @@
 			path = VCPureYogaClassBooking;
 			sourceTree = "<group>";
 		};
+		E503EB9B700FD2D25A95A868 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACFE20C962F2CDCD2FF29323 /* Pods_VCPureYogaClassBooking.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 660EF4EB20B911EC00D42F23 /* Build configuration list for PBXNativeTarget "VCPureYogaClassBooking" */;
 			buildPhases = (
+				FBAE590B9E9671281674D96C /* [CP] Check Pods Manifest.lock */,
 				660EF4D220B911EA00D42F23 /* Sources */,
 				660EF4D320B911EA00D42F23 /* Frameworks */,
 				660EF4D420B911EA00D42F23 /* Resources */,
+				2F7E2A5066B55A4A39995487 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +162,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2F7E2A5066B55A4A39995487 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-VCPureYogaClassBooking/Pods-VCPureYogaClassBooking-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VCPureYogaClassBooking/Pods-VCPureYogaClassBooking-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBAE590B9E9671281674D96C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VCPureYogaClassBooking-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		660EF4D220B911EA00D42F23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -141,6 +209,7 @@
 				660EF4DC20B911EA00D42F23 /* ViewController.swift in Sources */,
 				660EF4DA20B911EA00D42F23 /* AppDelegate.swift in Sources */,
 				660EF4E220B911EA00D42F23 /* VCPureYogaClassBooking.xcdatamodeld in Sources */,
+				660EF4EF20B913A500D42F23 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +351,7 @@
 		};
 		660EF4EC20B911EC00D42F23 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE7C4E97AB677401D4D1D54 /* Pods-VCPureYogaClassBooking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -301,6 +371,7 @@
 		};
 		660EF4ED20B911EC00D42F23 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 437855BCDBAFA36B52D20F6A /* Pods-VCPureYogaClassBooking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

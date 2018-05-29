@@ -1,0 +1,16 @@
+PODS:
+  - Kanna (4.0.0)
+
+DEPENDENCIES:
+  - Kanna
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Kanna
+
+SPEC CHECKSUMS:
+  Kanna: d5ae2a26472f7e7a474e7f36a9cd8aa2c8c63ad3
+
+PODFILE CHECKSUM: e13a3407642010160a1294b90c474038c6ae04ce
+
+COCOAPODS: 1.5.0
