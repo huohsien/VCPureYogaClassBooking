@@ -9,6 +9,8 @@
 import UIKit
 import Kanna
 import WebKit
+import CocoaLumberjack
+
 
 class ViewController: UIViewController, WKNavigationDelegate {
     
@@ -47,7 +49,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         self.view.bringSubview(toFront: progressView)
 
         guard let url = URL(string: Constants.baseUrl) else {
-            print("failed to create url")
+            DDLogError("failed to create url")
             return
         }
         let urlRequest = URLRequest(url: url)
@@ -60,7 +62,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         let urlString = wkWebView.url!.absoluteString
-        print("urlString=\(urlString)")
+        DDLogVerbose("urlString=\(urlString)")
         
         if urlString.hasPrefix("log://") {
             // print log of javascript

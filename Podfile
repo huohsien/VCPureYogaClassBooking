@@ -7,4 +7,5 @@ target 'VCPureYogaClassBooking' do
 
   # Pods for VCPureYogaClassBooking
   pod 'Kanna'
+  pod 'CocoaLumberjack/Swift'
 end
