@@ -53,7 +53,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
             return
         }
         
-        setupJSDebug()
+//        setupJSDebug()
 
         let urlRequest = URLRequest(url: url)
         wkWebView.load(urlRequest)
@@ -89,15 +89,20 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //MARK: - web javascript related functions
     func login() {
         
+//        let jsString = """
+//        document.getElementById('username').value = \"\(userName)\";
+//        document.getElementById('password').value = \"\(password)\";
+//        document.location.href = "log://1234";
+//        """
+
         let jsString = """
             document.getElementById('username').value = \"\(userName)\";
             document.getElementById('password').value = \"\(password)\";
-            location.href = "log://";
         """
         
         wkWebView.evaluateJavaScript(jsString) { (result, error) in
             if let error = error {
-                print("\(error)")
+                DDLogError("\(error)")
             }
         }
         
@@ -105,19 +110,19 @@ class ViewController: UIViewController, WKNavigationDelegate {
 
     }
     
-    func setupJSDebug() {
-        
-        wkWebView.evaluateJavaScript("""
-            function log( text ) {
-                location.href = "log://"+text;
-            }
-        """) { (result, error) in
-            if let error = error {
-                print("\(error)")
-            }
-        }
-
-    }
+//    func setupJSDebug() {
+//
+//        wkWebView.evaluateJavaScript("""
+//            function log( text ) {
+//                location.href = "log://"+text;
+//            }
+//        """) { (result, error) in
+//            if let error = error {
+//                DDLogError("\(error)")
+//            }
+//        }
+//
+//    }
     
     
     
