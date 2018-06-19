@@ -29,21 +29,6 @@ class LogFormatter: NSObject, DDLogFormatter {
     }
 }
 
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    
-    DDTTYLogger.sharedInstance.logFormatter = LogFormatter()
-    DDASLLogger.sharedInstance.logFormatter = LogFormatter()
-    
-    DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
-    DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
-    
-    let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-    fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-    DDLog.add(fileLogger)
-    
-    return true
-}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

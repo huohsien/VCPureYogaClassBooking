@@ -52,6 +52,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
             DDLogError("failed to create url")
             return
         }
+        
+        setupJSDebug()
+
         let urlRequest = URLRequest(url: url)
         wkWebView.load(urlRequest)
         loadingPageIndicator.startAnimating()
@@ -80,9 +83,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
         loadingPageIndicator.hidesWhenStopped = true
         wkWebView.alpha = 1.0
         
-        setupJSDebug()
         login()
     }
+    
     //MARK: - web javascript related functions
     func login() {
         
