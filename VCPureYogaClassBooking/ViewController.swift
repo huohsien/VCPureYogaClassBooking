@@ -67,17 +67,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let urlString = wkWebView.url!.absoluteString
         DDLogVerbose("urlString=\(urlString)")
         
-        if urlString.hasPrefix("log://") {
-            // print log of javascript
-            if isDebugingJavascript {
-                let str = wkWebView.url!.absoluteString
-                if let index = str.range(of: "log://")?.upperBound {
-                    let dataString: String = "\(str[index...])"
-                    print("js debug: \(self),\(dataString.removingPercentEncoding!)")
-                    return
-                }
-            }
-        }
+//        if urlString.hasPrefix("log://") {
+//            // print log of javascript
+//            if isDebugingJavascript {
+//                let str = wkWebView.url!.absoluteString
+//                if let index = str.range(of: "log://")?.upperBound {
+//                    let dataString: String = "\(str[index...])"
+//                    print("js debug: \(self),\(dataString.removingPercentEncoding!)")
+//                    return
+//                }
+//            }
+//        }
         
         loadingPageIndicator.stopAnimating()
         loadingPageIndicator.hidesWhenStopped = true
