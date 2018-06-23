@@ -55,8 +55,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             return
         }
         
-//        setupJSDebug()
-
         let urlRequest = URLRequest(url: url)
         wkWebView.load(urlRequest)
         loadingPageIndicator.startAnimating()
@@ -70,18 +68,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let urlString = wkWebView.url!.absoluteString
         DDLogVerbose("urlString=\(urlString)")
         
-//        if urlString.hasPrefix("log://") {
-//            // print log of javascript
-//            if isDebugingJavascript {
-//                let str = wkWebView.url!.absoluteString
-//                if let index = str.range(of: "log://")?.upperBound {
-//                    let dataString: String = "\(str[index...])"
-//                    print("js debug: \(self),\(dataString.removingPercentEncoding!)")
-//                    return
-//                }
-//            }
-//        }
-        
         loadingPageIndicator.stopAnimating()
         loadingPageIndicator.hidesWhenStopped = true
         wkWebView.alpha = 1.0
@@ -93,11 +79,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     func login() {
         DDLogVerbose("function begin")
 
-//        let jsString = """
-//        document.getElementById('username').value = \"\(userName)\";
-//        document.getElementById('password').value = \"\(password)\";
-//        document.location.href = "log://1234";
-//        """
+
 
         let jsString = """
             document.getElementById('username').value = \"\(userName)\";
@@ -113,6 +95,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 let jsString1 = """
                 var myForm = document.getElementById('sign-in-form');
                 myForm.querySelector('input[type="submit"]').click();
+                var tmp = document.querySelectorAll('button[data-class-id="1401"]');
+                tmp[0].click();
                 """
                 
                 self.wkWebView.evaluateJavaScript(jsString1) { (result, error) in
@@ -125,24 +109,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 }
             }
         }
-        
-
-
     }
-    
-//    func setupJSDebug() {
-//
-//        wkWebView.evaluateJavaScript("""
-//            function log( text ) {
-//                location.href = "log://"+text;
-//            }
-//        """) { (result, error) in
-//            if let error = error {
-//                DDLogError("\(error)")
-//            }
-//        }
-//
-//    }
     
     
     

@@ -11,7 +11,7 @@ import Foundation
 
 struct Constants {
     
-    static let baseUrl = "https://pure360.pure-yoga.com/zh-tw/TW"
+    static let baseUrl = "https://pure360.pure-yoga.com/zh-tw/TW?location_id=25"
 
     
 }
