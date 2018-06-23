@@ -28,7 +28,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DDLogVerbose("function begin")
+
         // positioning progress view
         progressView.frame = CGRect(x: 0, y: 88.0, width: view.bounds.size.width, height: 2.0)
         
@@ -38,7 +39,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     // MARK: - web view operations
     
     func loadWKWebView() {
-        
+        DDLogVerbose("function begin")
+
         let webViewRatio: CGFloat = 1.0
         wkWebView = WKWebView(frame: CGRect(x: 0.0, y: view.bounds.size.height * (1.0 - webViewRatio), width: view.bounds.size.width, height: view.bounds.size.height * webViewRatio))
         wkWebView.navigationDelegate = self
@@ -63,7 +65,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //MARK: - webkit callbacks
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
+        DDLogVerbose("function begin")
+
         let urlString = wkWebView.url!.absoluteString
         DDLogVerbose("urlString=\(urlString)")
         
@@ -88,7 +91,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     //MARK: - web javascript related functions
     func login() {
-        
+        DDLogVerbose("function begin")
+
 //        let jsString = """
 //        document.getElementById('username').value = \"\(userName)\";
 //        document.getElementById('password').value = \"\(password)\";
@@ -103,6 +107,22 @@ class ViewController: UIViewController, WKNavigationDelegate {
         wkWebView.evaluateJavaScript(jsString) { (result, error) in
             if let error = error {
                 DDLogError("\(error)")
+            } else {
+                
+                DDLogVerbose("fill the login info correctly")
+                let jsString1 = """
+                var myForm = document.getElementById('sign-in-form');
+                myForm.querySelector('input[type="submit"]').click();
+                """
+                
+                self.wkWebView.evaluateJavaScript(jsString1) { (result, error) in
+                    if let error = error {
+                        DDLogError("\(error)")
+                    } else {
+                        DDLogVerbose("submit the login form")
+
+                    }
+                }
             }
         }
         
@@ -129,6 +149,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //MARK: -
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
         if keyPath == "estimatedProgress" {
             progressView.isHidden = wkWebView.estimatedProgress == 1
             progressView.setProgress(Float(wkWebView.estimatedProgress), animated: true)
