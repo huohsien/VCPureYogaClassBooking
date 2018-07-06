@@ -84,6 +84,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let jsString = """
             document.getElementById('username').value = \"\(userName)\";
             document.getElementById('password').value = \"\(password)\";
+            console.log(\"\(userName)\");
+        
         """
         
         wkWebView.evaluateJavaScript(jsString) { (result, error) in
@@ -92,21 +94,29 @@ class ViewController: UIViewController, WKNavigationDelegate {
             } else {
                 
                 DDLogVerbose("fill the login info correctly")
-                let jsString1 = """
-                var myForm = document.getElementById('sign-in-form');
-                myForm.querySelector('input[type="submit"]').click();
-                var tmp = document.querySelectorAll('button[data-class-id="1401"]');
-                tmp[0].click();
-                """
                 
-                self.wkWebView.evaluateJavaScript(jsString1) { (result, error) in
-                    if let error = error {
-                        DDLogError("\(error)")
-                    } else {
-                        DDLogVerbose("submit the login form")
-
-                    }
-                }
+                
+//                let jsString1 = """
+//                var myForm = document.getElementById('sign-in-form');
+//                myForm.querySelector('input[type="submit"]').click();
+//                var tmp = document.querySelectorAll('button[data-class-id="1401"]');
+//                tmp[0].click();
+//                """
+                
+                
+//                let jsString1 = """
+//                var myForm = document.getElementById('sign-in-form');
+//                myForm.querySelector('input[type="submit"]').click();
+//                """
+//                
+//                self.wkWebView.evaluateJavaScript(jsString1) { (result, error) in
+//                    if let error = error {
+//                        DDLogError("\(error)")
+//                    } else {
+//                        DDLogVerbose("submit the login form")
+//
+//                    }
+//                }
             }
         }
     }
