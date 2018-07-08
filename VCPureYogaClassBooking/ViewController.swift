@@ -84,7 +84,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let jsString = """
             document.getElementById('username').value = \"\(userName)\";
             document.getElementById('password').value = \"\(password)\";
-            console.log(\"\(userName)\");
         
         """
         
