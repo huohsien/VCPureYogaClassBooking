@@ -12,7 +12,7 @@ import WebKit
 import CocoaLumberjack
 
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     
     @IBOutlet weak var loadingPageIndicator: UIActivityIndicatorView!
     
@@ -28,27 +28,49 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DDLogVerbose("function begin")
+        
+        DDLogVerbose("begin")
 
         // positioning progress view
         progressView.frame = CGRect(x: 0, y: 88.0, width: view.bounds.size.width, height: 2.0)
         
+        setupWebView()
         loadWKWebView()
     }
 
     // MARK: - web view operations
     
-    func loadWKWebView() {
-        DDLogVerbose("function begin")
+    private func setupWebView() {
+        DDLogVerbose("begin")
 
+        let contentController = WKUserContentController()
+        let userScript = WKUserScript(
+            source: """
+                document.getElementById('username').value = \"\(userName)\";
+                document.getElementById('password').value = \"\(password)\";
+
+            """,
+            injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
+            forMainFrameOnly: true
+        )
+        contentController.addUserScript(userScript)
+        contentController.add(self, name: "loginState")
+        
+        let config = WKWebViewConfiguration()
+        config.userContentController = contentController
+        
         let webViewRatio: CGFloat = 1.0
-        wkWebView = WKWebView(frame: CGRect(x: 0.0, y: view.bounds.size.height * (1.0 - webViewRatio), width: view.bounds.size.width, height: view.bounds.size.height * webViewRatio))
+        wkWebView = WKWebView(frame: CGRect(x: 0.0, y: view.bounds.size.height * (1.0 - webViewRatio), width: view.bounds.size.width, height: view.bounds.size.height * webViewRatio), configuration: config)
         wkWebView.navigationDelegate = self
         wkWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-
+        
         wkWebView.alpha = 0.0
         self.view.addSubview(wkWebView)
         self.view.bringSubview(toFront: progressView)
+    }
+    
+    func loadWKWebView() {
+        DDLogVerbose("begin")
 
         guard let url = URL(string: Constants.baseUrl) else {
             DDLogError("failed to create url")
@@ -63,7 +85,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //MARK: - webkit callbacks
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        DDLogVerbose("function begin")
+        DDLogVerbose("begin")
 
         let urlString = wkWebView.url!.absoluteString
         DDLogVerbose("urlString=\(urlString)")
@@ -71,29 +93,43 @@ class ViewController: UIViewController, WKNavigationDelegate {
         loadingPageIndicator.stopAnimating()
         loadingPageIndicator.hidesWhenStopped = true
         wkWebView.alpha = 1.0
-        
-        login()
+        checkLoginState()
+//        login()
     }
     
     //MARK: - web javascript related functions
-    func login() {
-        DDLogVerbose("function begin")
-
-
-
-        let jsString = """
-            document.getElementById('username').value = \"\(userName)\";
-            document.getElementById('password').value = \"\(password)\";
+    func checkLoginState() {
+        DDLogVerbose("begin")
         
+        let jsString = """
+            webkit.messageHandlers.loginState.postMessage("hello");
         """
         
         wkWebView.evaluateJavaScript(jsString) { (result, error) in
             if let error = error {
                 DDLogError("\(error)")
             } else {
-                
+                DDLogVerbose("posted message from web page")
+            }
+        }
+    }
+    
+    func login() {
+        DDLogVerbose("begin")
+
+        let jsString = """
+            document.getElementById('username').value = \"\(userName)\";
+            document.getElementById('password').value = \"\(password)\";
+
+        """
+        
+        wkWebView.evaluateJavaScript(jsString) { (result, error) in
+            if let error = error {
+                DDLogError("\(error)")
+            } else {
+
                 DDLogVerbose("fill the login info correctly")
-                
+        
                 
 //                let jsString1 = """
 //                var myForm = document.getElementById('sign-in-form');
@@ -103,20 +139,30 @@ class ViewController: UIViewController, WKNavigationDelegate {
 //                """
                 
                 
-//                let jsString1 = """
-//                var myForm = document.getElementById('sign-in-form');
-//                myForm.querySelector('input[type="submit"]').click();
-//                """
-//                
-//                self.wkWebView.evaluateJavaScript(jsString1) { (result, error) in
-//                    if let error = error {
-//                        DDLogError("\(error)")
-//                    } else {
-//                        DDLogVerbose("submit the login form")
-//
-//                    }
-//                }
+                let jsString1 = """
+                var myForm = document.getElementById('sign-in-form');
+                myForm.querySelector('input[type="submit"]').click();
+                """
+                
+                self.wkWebView.evaluateJavaScript(jsString1) { (result, error) in
+                    if let error = error {
+                        DDLogError("\(error)")
+                    } else {
+                        DDLogVerbose("submit the login form")
+
+                    }
+                }
             }
+        }
+    }
+    
+    
+    
+    // MARK: - WKScriptMessageHandler
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "loginState" {
+            DDLogVerbose("JavaScript is sending a message \(message.body)")
         }
     }
     
@@ -125,50 +171,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
     //MARK: -
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-
+        
         if keyPath == "estimatedProgress" {
             progressView.isHidden = wkWebView.estimatedProgress == 1
             progressView.setProgress(Float(wkWebView.estimatedProgress), animated: true)
         }
     }
-    //MARK: - html parser
-    
-    func fetchAndUpdateData() {
-        
-        // get the result of the requested page
-        wkWebView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (result, error) in
-            
-            self.html = result as! String
-            
-            // parsing
-            do {
-                let doc = try HTML(html: self.html, encoding: .utf8)
-                
-                for tr in doc.xpath("//tbody/tr") {
-                    for td in tr.xpath("./td") {
-                        guard let locationNameString: String = td.text else {continue}
-                        //                        print(locationNameString)
-                        if locationNameString == "臺灣大學" || locationNameString == "大安森林" {
-                            
-                            
-                            let dateTime = tr.xpath("./td[3]")
-                            
-                            if let node = dateTime.first {
-                                if let dateTimeString: String = node.content {
-                                    
-                                    if dateTimeString.contains("儀器")  {
-                                        continue
-                                    }
-                                  
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            } catch {/* error handling here */}
-        }
-    }
 }
-
